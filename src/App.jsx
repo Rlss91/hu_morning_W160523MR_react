@@ -6,7 +6,7 @@ import LoginPage from "./pages/login/LoginPage";
 import RegisterComponent from "./pages/register/RegisterPage";
 
 const App = () => {
-  return <LoginPage />;
+  return <RegisterComponent />;
 };
 
 export default App;
