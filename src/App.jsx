@@ -1,27 +1,12 @@
 import { Container } from "@mui/material";
-import nextKey from "generate-my-key";
-import { Typography } from "@mui/material";
-
-let animals = [];
+import EventsComponent from "./playground/l4/EventsComponent";
+import CardComponent from "./components/CardComponent";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/login/LoginPage";
+import RegisterComponent from "./pages/register/RegisterPage";
 
 const App = () => {
-  if (!animals.length) {
-    return (
-      <Container>
-        <Typography variant="h4">All animals adopted successfully</Typography>
-      </Container>
-    );
-  }
-
-  return (
-    <Container>
-      {animals.map((animal) => (
-        <Typography key={nextKey()} variant="body1">
-          {animal}
-        </Typography>
-      ))}
-    </Container>
-  );
+  return <LoginPage />;
 };
 
 export default App;

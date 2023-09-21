@@ -23,8 +23,11 @@ const CardComponent = ({
   alt,
   cardNumber,
 }) => {
+  const handlePhoneClick = () => {
+    console.log("you clicked on phone btn");
+  };
   return (
-    <Card sx={{ maxWidth: "20rem" }}>
+    <Card>
       <CardActionArea>
         <CardMedia component="img" image={img} alt={alt} />
       </CardActionArea>
@@ -53,7 +56,7 @@ const CardComponent = ({
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box>
-            <IconButton>
+            <IconButton onClick={handlePhoneClick}>
               <PhoneIcon />
             </IconButton>
             <IconButton>
