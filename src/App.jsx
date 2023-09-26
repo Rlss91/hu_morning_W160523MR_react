@@ -4,9 +4,10 @@ import CardComponent from "./components/CardComponent";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterComponent from "./pages/register/RegisterPage";
+import UserManagement from "./pages/users/UserManagement";
 
 const App = () => {
-  return <RegisterComponent />;
+  return <HomePage />;
 };
 
 export default App;
