@@ -16,6 +16,15 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
+import NavLinkComponent from "./NavLinkComponent";
+import nextKey from "generate-my-key";
+
+const myLinks = [
+  { to: ROUTES.HOME, children: "Home page" },
+  { to: ROUTES.REGISTER, children: "Register page" },
+  { to: ROUTES.LOGIN, children: "Login page" },
+];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -177,11 +186,11 @@ const HeaderComponent = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link to="/">
-              <Typography color="text.primary" sx={{ p: 2 }}>
-                Home page
-              </Typography>
-            </Link>
+            {myLinks.map((myItem) => (
+              <NavLinkComponent to={myItem.to} key={nextKey()}>
+                {myItem.children}
+              </NavLinkComponent>
+            ))}
           </Box>
           <Search>
             <SearchIconWrapper>
