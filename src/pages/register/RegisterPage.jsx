@@ -13,13 +13,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CopyrightComponent from "./ui/CopyrightComponent";
 
-const RegisterComponent = () => {
+const RegisterPage = () => {
   const [inputsValue, setInputsValue] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
+  console.log("RegisterComponent");
   const handleInputsChange = (e) => {
     //step 1
     // setInputsValue((currentState) => {
@@ -154,4 +155,4 @@ const RegisterComponent = () => {
   );
 };
 
-export default RegisterComponent;
+export default RegisterPage;
