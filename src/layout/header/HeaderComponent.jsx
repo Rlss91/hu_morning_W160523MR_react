@@ -19,12 +19,7 @@ import { Link } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import NavLinkComponent from "./NavLinkComponent";
 import nextKey from "generate-my-key";
-
-const myLinks = [
-  { to: ROUTES.HOME, children: "Home page" },
-  { to: ROUTES.REGISTER, children: "Register page" },
-  { to: ROUTES.LOGIN, children: "Login page" },
-];
+import myLinks from "../myLinks";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
