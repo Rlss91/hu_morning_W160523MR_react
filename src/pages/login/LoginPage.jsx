@@ -13,6 +13,8 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import CopyrightComponent from "./ui/CopyrightComponent";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -24,6 +26,7 @@ const LoginPage = () => {
    */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const navigate = useNavigate();
   /* logic lvl for js */
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,6 +41,11 @@ const LoginPage = () => {
   };
   const handlePasswordInputChange = (e) => {
     setPasswordValue(e.target.value);
+  };
+  const handleBtnClick = () => {
+    setTimeout(() => {
+      navigate(ROUTES.HOME);
+    }, 2000);
   };
   /* template lvl for html */
   return (
@@ -114,6 +122,7 @@ const LoginPage = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleBtnClick}
             >
               Sign In
             </Button>

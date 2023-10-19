@@ -15,6 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { Switch } from "@mui/material";
 import { Link } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import NavLinkComponent from "./NavLinkComponent";
@@ -61,7 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -83,6 +84,10 @@ const HeaderComponent = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleThemeChange = (event) => {
+    onThemeChange(event.target.checked);
   };
 
   const menuId = "primary-search-account-menu";
@@ -196,6 +201,17 @@ const HeaderComponent = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          <Box
+            sx={{
+              my: 2,
+              p: 1,
+            }}
+          >
+            <Typography sx={{ display: { xs: "none", md: "inline" } }}>
+              {isDarkTheme ? "Dark" : "Light"} Mode
+            </Typography>
+            <Switch checked={isDarkTheme} onChange={handleThemeChange} />
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
