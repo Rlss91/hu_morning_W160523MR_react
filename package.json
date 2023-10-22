@@ -19,7 +19,7 @@
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.11",
-    "twin-moon-color": "^0.0.2",
+    "twin-moon-color": "^0.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

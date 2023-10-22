@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Container, Grid } from "@mui/material";
 import nextKey from "generate-my-key";
 import CardComponent from "../../components/CardComponent";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 
 let initialDataFromServer = [
   {
@@ -48,6 +50,7 @@ let initialDataFromServer = [
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState(initialDataFromServer);
+  const navigate = useNavigate();
   const handleDeleteCard = (_id) => {
     console.log("_id to delete (HomePage)", _id);
     setDataFromServer((dataFromServerCopy) =>
@@ -56,6 +59,10 @@ const HomePage = () => {
     // dataFromServer = dataFromServer.filter((card) => card._id != _id);
     //return true for all the cards that has id that not equal to the id we want to delete
     // console.log("dataFromServer", dataFromServer);
+  };
+  const handleEditCard = (_id) => {
+    // console.log("id to edit", _id);
+    navigate(`${ROUTES.EDITCARD}/${_id}`);
   };
   return (
     <Container>
@@ -72,6 +79,7 @@ const HomePage = () => {
               alt={card.alt}
               cardNumber={card.cardNumber}
               onDeleteCard={handleDeleteCard}
+              onEditCard={handleEditCard}
             />
           </Grid>
         ))}
