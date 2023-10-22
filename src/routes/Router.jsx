@@ -11,6 +11,8 @@ import SandboxPage from "../pages/Sandbox/SandboxPage";
 import Effect1 from "../playground/l7/Effect1";
 import Effect2 from "../playground/l7/Effect2";
 import Effect3Page from "../playground/l7/Effect3Page";
+import StateCompo from "../playground/l7/stateCompo";
+import CounterPage from "../playground/l7/CustomHooks/CounterPage";
 
 const Router = () => {
   return (
@@ -24,6 +26,8 @@ const Router = () => {
         <Route path="effect1" element={<Effect1 />} />
         <Route path="effect2" element={<Effect2 />} />
         <Route path="effect3" element={<Effect3Page />} />
+        <Route path="state" element={<StateCompo />} />
+        <Route path="hooks" element={<CounterPage />} />
       </Route>
       <Route path="*" element={<Error404Page />} />
     </Routes>
