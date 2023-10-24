@@ -13,6 +13,10 @@ import Effect2 from "../playground/l7/Effect2";
 import Effect3Page from "../playground/l7/Effect3Page";
 import StateCompo from "../playground/l7/stateCompo";
 import CounterPage from "../playground/l7/CustomHooks/CounterPage";
+import RenderPage9 from "../playground/l9/memo/RenderPage9";
+import AnimalComponent from "../playground/l9/useCallback/AnimalComponent";
+import CounterL9Page from "../playground/l9/useCallback/CounterL9Page";
+import UseMemoPage from "../playground/l9/useMemo/UseMemoPage";
 
 const Router = () => {
   return (
@@ -28,6 +32,12 @@ const Router = () => {
         <Route path="effect3" element={<Effect3Page />} />
         <Route path="state" element={<StateCompo />} />
         <Route path="hooks" element={<CounterPage />} />
+      </Route>
+      <Route path="/l9">
+        <Route path="render" element={<RenderPage9 />} />
+        <Route path="callback" element={<AnimalComponent />} />
+        <Route path="callback2" element={<CounterL9Page />} />
+        <Route path="usememo" element={<UseMemoPage />} />
       </Route>
       <Route path="*" element={<Error404Page />} />
     </Routes>
