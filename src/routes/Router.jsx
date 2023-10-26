@@ -17,6 +17,7 @@ import RenderPage9 from "../playground/l9/memo/RenderPage9";
 import AnimalComponent from "../playground/l9/useCallback/AnimalComponent";
 import CounterL9Page from "../playground/l9/useCallback/CounterL9Page";
 import UseMemoPage from "../playground/l9/useMemo/UseMemoPage";
+import CarTargilPage from "../playground/l9/targil/CarTargilPage";
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
         <Route path="callback" element={<AnimalComponent />} />
         <Route path="callback2" element={<CounterL9Page />} />
         <Route path="usememo" element={<UseMemoPage />} />
+        <Route path="targil" element={<CarTargilPage />} />
       </Route>
       <Route path="*" element={<Error404Page />} />
     </Routes>

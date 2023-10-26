@@ -10,6 +10,26 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2";
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    /*
+      if token exists we edit the request
+      adding headers
+      and sending the request to the server
+    */
+    config.headers["x-auth-token"] = token;
+    /*
+      headers = {
+        x-auth-token:token
+      }
+    */
+  }
+  return config;
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

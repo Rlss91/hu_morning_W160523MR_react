@@ -14,8 +14,12 @@ const CounterL9Page = () => {
 
   return (
     <Fragment>
-      <CounterButton onBtnClick={handleAge}>age {age}</CounterButton>
-      <CounterButton onBtnClick={handleHeigh}>height {heigh}</CounterButton>
+      <CounterButton onBtnClick={handleAge} txt={age}>
+        age{" "}
+      </CounterButton>
+      <CounterButton onBtnClick={handleHeigh} txt={heigh}>
+        height{" "}
+      </CounterButton>
     </Fragment>
   );
 };

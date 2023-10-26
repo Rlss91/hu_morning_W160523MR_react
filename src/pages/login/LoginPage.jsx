@@ -16,6 +16,7 @@ import CopyrightComponent from "./ui/CopyrightComponent";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -29,22 +30,15 @@ const LoginPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const navigate = useNavigate();
   /* logic lvl for js */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-  const handleEmailInputChange = (e) => {
-    setEmailValue(e.target.value);
-  };
-  const handlePasswordInputChange = (e) => {
-    setPasswordValue(e.target.value);
-  };
-  const handleBtnClick = () => {
-    setTimeout(() => {
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      let { data } = await axios.post("/users/login", {
+        email: emailValue,
+        password: passwordValue,
+      });
+      localStorage.setItem("token", data);
+      console.log("data from login", data);
       toast("You logged in successfully 👌", {
         position: "top-right",
         autoClose: 5000,
@@ -56,7 +50,32 @@ const LoginPage = () => {
         theme: "light",
       });
       navigate(ROUTES.HOME);
-    }, 2000);
+    } catch (err) {
+      console.log("err from login", err);
+    }
+  };
+  const handleEmailInputChange = (e) => {
+    setEmailValue(e.target.value);
+  };
+  const handlePasswordInputChange = (e) => {
+    setPasswordValue(e.target.value);
+  };
+  const handleBtnClick = async () => {
+    // try {
+    //   setTimeout(() => {
+    //     toast("You logged in successfully 👌", {
+    //       position: "top-right",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "light",
+    //     });
+    //     navigate(ROUTES.HOME);
+    //   }, 2000);
+    // } catch (err) {}
   };
   /* template lvl for html */
   return (

@@ -1,56 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import nextKey from "generate-my-key";
 import CardComponent from "../../components/CardComponent";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
-
-let initialDataFromServer = [
-  {
-    _id: "650ae1b9ae22ab105f45531d",
-    title: "title 1",
-    subTitle: "sub title 1",
-    phone: "050-50505050",
-    address: "asdfasdfsadfasdf",
-    img: "https://pngimg.com/d/free_PNG90775.png",
-    alt: "yes",
-    cardNumber: 35154354,
-  },
-  {
-    _id: "650ae1b9ae22ab105f45531e",
-    title: "title 1",
-    subTitle: "sub title 2",
-    phone: "050-50505050",
-    address: "asdfasdfsadfasdf",
-    img: "https://pngimg.com/d/free_PNG90775.png",
-    alt: "yes",
-    cardNumber: 35154354,
-  },
-  {
-    // _id: true,
-    _id: "650ae1b9ae22ab105f45531f",
-    title: "title 3",
-    subTitle: "sub title 3",
-    phone: "050-50505050",
-    address: "asdfasdfsadfasdf",
-    img: "https://pngimg.com/d/free_PNG90775.png",
-    alt: "yes",
-    cardNumber: 35154354,
-  },
-  {
-    // _id: true,
-    _id: "650ae1b9ae22ab105f455320",
-    title: "title 4",
-    subTitle: "sub title 4",
-    phone: "050-50505050",
-    address: "asdfasdfsadfasdf",
-    cardNumber: 35154354,
-  },
-];
+import axios from "axios";
 
 const HomePage = () => {
-  const [dataFromServer, setDataFromServer] = useState(initialDataFromServer);
+  const [dataFromServer, setDataFromServer] = useState([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get("/cards")
+      .then(({ data }) => {
+        console.log("data", data);
+        setDataFromServer(data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }, []);
   const handleDeleteCard = (_id) => {
     console.log("_id to delete (HomePage)", _id);
     setDataFromServer((dataFromServerCopy) =>
@@ -72,11 +41,11 @@ const HomePage = () => {
             <CardComponent
               _id={card._id}
               title={card.title}
-              subTitle={card.subTitle}
+              subTitle={card.subtitle}
               phone={card.phone}
-              address={card.address}
-              img={card.img}
-              alt={card.alt}
+              address={`${card.address.city}, ${card.address.street} ${card.address.houseNumber}`}
+              img={card.image.url}
+              alt={card.image.alt}
               cardNumber={card.cardNumber}
               onDeleteCard={handleDeleteCard}
               onEditCard={handleEditCard}
