@@ -5,9 +5,13 @@ import HeaderComponent from "./header/HeaderComponent";
 import MainComponent from "./main/MainComponent";
 import FooterComponent from "./footer/FooterComponent";
 import tmc from "twin-moon-color";
+import { useDispatch, useSelector } from "react-redux";
+import { darkThemeActions } from "../store/darkThemeSlice";
 
 const LayoutComponent = ({ children }) => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  // const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const isDarkTheme = useSelector((bigPie) => bigPie.darkThemeSlice.darkTheme);
+  const dispatch = useDispatch();
 
   const themes = tmc({
     "text.headerColor": "!#b219e6",
@@ -31,7 +35,7 @@ const LayoutComponent = ({ children }) => {
   // });
 
   const handleThemeChange = (checked) => {
-    setIsDarkTheme(checked);
+    dispatch(darkThemeActions.changeTheme());
   };
 
   return (

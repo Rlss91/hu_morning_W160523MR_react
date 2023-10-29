@@ -20,6 +20,7 @@ import UseMemoPage from "../playground/l9/useMemo/UseMemoPage";
 import CarTargilPage from "../playground/l9/targil/CarTargilPage";
 import CounterDisplay from "../playground/l11/CounterDisplay";
 import CounterActionsPage from "../playground/l11/CounterActionsPage";
+import CreatePardPage from "../pages/createCardPage/CreatePardPage";
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTES.CREATECARD} element={<CreatePardPage />} />
       <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
       <Route path={ROUTES.SANDBOX} element={<SandboxPage />}>
         <Route path="l1css" element={<Css1Component />} />

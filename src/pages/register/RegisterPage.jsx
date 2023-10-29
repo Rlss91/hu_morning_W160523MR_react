@@ -84,7 +84,7 @@ const RegisterPage = () => {
           houseNumber: inputsValue.houseNumber,
           zip: +inputsValue.zip,
         },
-        isBusiness: false,
+        isBusiness: true,
       };
       const { data } = await axios.post("/users", request);
       console.log("data", data);
