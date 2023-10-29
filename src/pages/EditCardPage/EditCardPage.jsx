@@ -6,6 +6,7 @@ import {
   Typography,
   Divider,
   Button,
+  Paper,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
@@ -224,6 +225,9 @@ const EditCardPage = () => {
           </Link>
         </Grid>
       </Grid>
+      <Paper elevation={1} variant="elevation">
+        Special thanks to Inon
+      </Paper>
     </Container>
   );
 };

@@ -18,6 +18,8 @@ import AnimalComponent from "../playground/l9/useCallback/AnimalComponent";
 import CounterL9Page from "../playground/l9/useCallback/CounterL9Page";
 import UseMemoPage from "../playground/l9/useMemo/UseMemoPage";
 import CarTargilPage from "../playground/l9/targil/CarTargilPage";
+import CounterDisplay from "../playground/l11/CounterDisplay";
+import CounterActionsPage from "../playground/l11/CounterActionsPage";
 
 const Router = () => {
   return (
@@ -40,6 +42,9 @@ const Router = () => {
         <Route path="callback2" element={<CounterL9Page />} />
         <Route path="usememo" element={<UseMemoPage />} />
         <Route path="targil" element={<CarTargilPage />} />
+      </Route>
+      <Route path="/l11" element={<CounterDisplay />}>
+        <Route path="action" element={<CounterActionsPage />} />
       </Route>
       <Route path="*" element={<Error404Page />} />
     </Routes>

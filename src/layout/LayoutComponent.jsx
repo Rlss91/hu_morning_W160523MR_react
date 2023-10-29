@@ -9,7 +9,10 @@ import tmc from "twin-moon-color";
 const LayoutComponent = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const themes = tmc();
+  const themes = tmc({
+    "text.headerColor": "!#b219e6",
+    "text.headerActive": "#9e165c",
+  });
   // console.log("themes", themes);
   // const themes = tmc({ primary: "#00FF00", elisheva: "#FF0000" });
 

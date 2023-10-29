@@ -5,4 +5,13 @@ const myLinks = [
   { to: ROUTES.REGISTER, children: "Register page" },
   { to: ROUTES.LOGIN, children: "Login page" },
 ];
+
+const alwaysLinks = [{ to: ROUTES.HOME, children: "Home page" }];
+const loggedInLinks = [{ to: "/profile", children: "Profile page" }];
+const loggedOutLinks = [
+  { to: ROUTES.REGISTER, children: "Register page" },
+  { to: ROUTES.LOGIN, children: "Login page" },
+];
+
 export default myLinks;
+export { alwaysLinks, loggedInLinks, loggedOutLinks };

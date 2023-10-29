@@ -12,11 +12,14 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import CopyrightComponent from "./ui/CopyrightComponent";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/ROUTES";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
+import CopyrightComponent from "./ui/CopyrightComponent";
+import ROUTES from "../../routes/ROUTES";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -29,6 +32,7 @@ const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   /* logic lvl for js */
   const handleSubmit = async (event) => {
     try {
@@ -49,6 +53,7 @@ const LoginPage = () => {
         progress: undefined,
         theme: "light",
       });
+      dispatch(authActions.login(jwtDecode(data)));
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from login", err);
