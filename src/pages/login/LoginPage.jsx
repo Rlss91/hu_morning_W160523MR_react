@@ -20,6 +20,8 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import CopyrightComponent from "./ui/CopyrightComponent";
 import ROUTES from "../../routes/ROUTES";
+import { validateLogin } from "../../validation/loginValidation";
+import { Alert } from "@mui/material";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -31,12 +33,21 @@ const LoginPage = () => {
    */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   /* logic lvl for js */
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      const joiResponse = validateLogin({
+        email: emailValue,
+        password: passwordValue,
+        name: { first: "" },
+      });
+      console.log("joiResponse", joiResponse);
+      setErrorsState(joiResponse);
+      if (joiResponse) return;
       let { data } = await axios.post("/users/login", {
         email: emailValue,
         password: passwordValue,
@@ -64,23 +75,6 @@ const LoginPage = () => {
   };
   const handlePasswordInputChange = (e) => {
     setPasswordValue(e.target.value);
-  };
-  const handleBtnClick = async () => {
-    // try {
-    //   setTimeout(() => {
-    //     toast("You logged in successfully 👌", {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //     navigate(ROUTES.HOME);
-    //   }, 2000);
-    // } catch (err) {}
   };
   /* template lvl for html */
   return (
@@ -136,6 +130,9 @@ const LoginPage = () => {
               value={emailValue}
               onChange={handleEmailInputChange}
             />
+            {errorsState && errorsState.email && (
+              <Alert severity="warning">{errorsState.email}</Alert>
+            )}
             <TextField
               margin="normal"
               required
@@ -148,6 +145,9 @@ const LoginPage = () => {
               value={passwordValue}
               onChange={handlePasswordInputChange}
             />
+            {errorsState && errorsState.password && (
+              <Alert severity="warning">{errorsState.password}</Alert>
+            )}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -157,7 +157,6 @@ const LoginPage = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleBtnClick}
             >
               Sign In
             </Button>
