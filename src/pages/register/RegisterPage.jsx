@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CopyrightComponent from "./ui/CopyrightComponent";
 import axios from "axios";
+import { normalizeData } from "./normalizeData";
 
 const RegisterPage = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -63,29 +64,7 @@ const RegisterPage = () => {
     try {
       event.preventDefault();
       // inputsValue.isBusiness = false;
-      let request = {
-        name: {
-          first: inputsValue.first,
-          middle: inputsValue.middle,
-          last: inputsValue.last,
-        },
-        phone: inputsValue.phone,
-        email: inputsValue.email,
-        password: inputsValue.password,
-        image: {
-          url: inputsValue.url,
-          alt: inputsValue.alt,
-        },
-        address: {
-          state: inputsValue.state,
-          country: inputsValue.country,
-          city: inputsValue.city,
-          street: inputsValue.street,
-          houseNumber: inputsValue.houseNumber,
-          zip: +inputsValue.zip,
-        },
-        isBusiness: true,
-      };
+      let request = normalizeData(inputsValue);
       const { data } = await axios.post("/users", request);
       console.log("data", data);
     } catch (err) {
