@@ -29,10 +29,13 @@ import Search from "./ui/Search";
 import SearchIconWrapper from "./ui/SearchIconWrapper";
 import StyledInputBase from "./ui/StyledInputBase";
 import Links from "./ui/Links";
+import LeftDrawerComponent from "./ui/LeftDrawerComponent";
+import { useState } from "react";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -56,6 +59,13 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
 
   const handleThemeChange = (event) => {
     onThemeChange(event.target.checked);
+  };
+
+  const handleOpenDrawerClick = () => {
+    setIsOpen(true);
+  };
+  const handleCloseDrawerClick = () => {
+    setIsOpen(false);
   };
 
   const menuId = "primary-search-account-menu";
@@ -142,6 +152,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={handleOpenDrawerClick}
           >
             <MenuIcon />
           </IconButton>
@@ -222,6 +233,10 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <LeftDrawerComponent
+        isOpen={isOpen}
+        onCloseDrawer={handleCloseDrawerClick}
+      />
     </Box>
   );
 };
