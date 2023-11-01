@@ -63,6 +63,7 @@ const RegisterPage = () => {
       event.preventDefault();
       // inputsValue.isBusiness = false;
       const errors = validateRegister(inputsValue);
+      console.log(errors);
       if (errors) return;
       let request = normalizeData(inputsValue);
       const { data } = await axios.post("/users", request);

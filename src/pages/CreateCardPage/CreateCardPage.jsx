@@ -12,7 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
 
-const EditCardPage = () => {
+const CreateCardPage = () => {
   const [inputsValue, setInputValue] = useState({
     title: "",
     subtitle: "",
@@ -40,7 +40,7 @@ const EditCardPage = () => {
   };
   const handleUpdateChangesClick = async () => {
     try {
-      const { data } = await axios.put("/cards/" + _id, {
+      const { data } = await axios.post("/cards", {
         title: inputsValue.title,
         subtitle: inputsValue.subtitle,
         description: inputsValue.description,
@@ -232,4 +232,4 @@ const EditCardPage = () => {
     </Container>
   );
 };
-export default EditCardPage;
+export default CreateCardPage;

@@ -43,7 +43,6 @@ const LoginPage = () => {
       const joiResponse = validateLogin({
         email: emailValue,
         password: passwordValue,
-        name: { first: "" },
       });
       console.log("joiResponse", joiResponse);
       setErrorsState(joiResponse);
