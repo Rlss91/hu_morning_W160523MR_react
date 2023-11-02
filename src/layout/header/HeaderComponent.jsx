@@ -113,7 +113,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Messages!!</p>
       </MenuItem>
       <MenuItem>
         <IconButton

@@ -21,6 +21,8 @@ import CarTargilPage from "../playground/l9/targil/CarTargilPage";
 import CounterDisplay from "../playground/l11/CounterDisplay";
 import CounterActionsPage from "../playground/l11/CounterActionsPage";
 import CreateCardPage from "../pages/CreateCardPage/CreateCardPage";
+import AuthGuard from "../Guard/AuthGuard";
+import BizGuard from "../Guard/BizGuard";
 
 const Router = () => {
   return (
@@ -28,7 +30,16 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-      <Route path={ROUTES.CREATECARD} element={<CreateCardPage />} />
+      <Route
+        path={ROUTES.CREATECARD}
+        element={
+          <AuthGuard>
+            <BizGuard>
+              <CreateCardPage />
+            </BizGuard>
+          </AuthGuard>
+        }
+      />
       <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
       <Route path={ROUTES.SANDBOX} element={<SandboxPage />}>
         <Route path="l1css" element={<Css1Component />} />

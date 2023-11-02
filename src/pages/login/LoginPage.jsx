@@ -22,6 +22,8 @@ import CopyrightComponent from "./ui/CopyrightComponent";
 import ROUTES from "../../routes/ROUTES";
 import { validateLogin } from "../../validation/loginValidation";
 import { Alert } from "@mui/material";
+import useAutoLogin from "../../hooks/useAutoLogin";
+import { storeToken } from "../../service/storageService";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -33,9 +35,11 @@ const LoginPage = () => {
    */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
   const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const autoLogin = useAutoLogin();
   /* logic lvl for js */
   const handleSubmit = async (event) => {
     try {
@@ -51,7 +55,8 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      localStorage.setItem("token", data);
+      // localStorage.setItem("token", data);
+      storeToken(data, rememberMe);
       console.log("data from login", data);
       toast("You logged in successfully 👌", {
         position: "top-right",
@@ -63,7 +68,7 @@ const LoginPage = () => {
         progress: undefined,
         theme: "light",
       });
-      dispatch(authActions.login(jwtDecode(data)));
+      autoLogin(true); //skip token test
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from login", err);
@@ -74,6 +79,9 @@ const LoginPage = () => {
   };
   const handlePasswordInputChange = (e) => {
     setPasswordValue(e.target.value);
+  };
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
   };
   /* template lvl for html */
   return (
@@ -148,7 +156,14 @@ const LoginPage = () => {
               <Alert severity="warning">{errorsState.password}</Alert>
             )}
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                />
+              }
               label="Remember me"
             />
             <Button
