@@ -23,11 +23,12 @@ const CardComponent = ({
   address,
   img,
   alt,
+  like,
   cardNumber,
   onDeleteCard,
   onEditCard,
 }) => {
-  console.log("CardComponent");
+  // console.log("CardComponent");
   const handlePhoneClick = () => {
     console.log("you clicked on phone btn");
   };
@@ -81,7 +82,7 @@ const CardComponent = ({
               <DeleteIcon />
             </IconButton>
             <IconButton>
-              <FavoriteIcon />
+              <FavoriteIcon color={like ? "favActive" : ""} />
             </IconButton>
           </Box>
         </Box>
@@ -98,6 +99,7 @@ CardComponent.propTypes = {
   address: PropTypes.string,
   img: PropTypes.string,
   alt: PropTypes.string,
+  like: PropTypes.bool,
   cardNumber: PropTypes.number,
   onDeleteCard: PropTypes.func.isRequired,
   onEditCard: PropTypes.func.isRequired,

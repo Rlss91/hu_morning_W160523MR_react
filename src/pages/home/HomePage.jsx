@@ -5,14 +5,18 @@ import CardComponent from "../../components/CardComponent";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
+import homePageNormalization from "./homePageNormalization";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
   const navigate = useNavigate();
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   useEffect(() => {
     axios
       .get("/cards")
       .then(({ data }) => {
+        if (userData) data = homePageNormalization(data, userData._id);
         console.log("data", data);
         setDataFromServer(data);
       })
@@ -33,6 +37,7 @@ const HomePage = () => {
     // console.log("id to edit", _id);
     navigate(`${ROUTES.EDITCARD}/${_id}`);
   };
+  console.log(dataFromServer[0]);
   return (
     <Container>
       <Grid container spacing={2}>
@@ -46,6 +51,7 @@ const HomePage = () => {
               address={`${card.address.city}, ${card.address.street} ${card.address.houseNumber}`}
               img={card.image.url}
               alt={card.image.alt}
+              like={card.likes}
               cardNumber={card.cardNumber}
               onDeleteCard={handleDeleteCard}
               onEditCard={handleEditCard}
