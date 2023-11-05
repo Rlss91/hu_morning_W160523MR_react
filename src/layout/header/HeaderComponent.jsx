@@ -9,7 +9,7 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -25,12 +25,10 @@ import { Switch } from "@mui/material";
 //   loggedOutLinks,
 // } from "../myLinks";
 
-import Search from "./ui/Search";
-import SearchIconWrapper from "./ui/SearchIconWrapper";
-import StyledInputBase from "./ui/StyledInputBase";
 import Links from "./ui/Links";
 import LeftDrawerComponent from "./ui/LeftDrawerComponent";
 import { useState } from "react";
+import FilterComponent from "./ui/FilterComponent";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -165,15 +163,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             LOGO
           </Typography>
           <Links />
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <FilterComponent />
           <Box
             sx={{
               my: 2,
