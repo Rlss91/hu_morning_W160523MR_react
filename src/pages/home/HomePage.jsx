@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import nextKey from "generate-my-key";
 import CardComponent from "../../components/CardComponent";
@@ -8,8 +8,6 @@ import axios from "axios";
 import homePageNormalization from "./homePageNormalization";
 import { useSelector } from "react-redux";
 import useQueryParams from "../../hooks/useQueryParams";
-
-let initialDataFromServer = [];
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
@@ -21,20 +19,26 @@ const HomePage = () => {
       .get("/cards")
       .then(({ data }) => {
         if (userData) data = homePageNormalization(data, userData._id);
-        initialDataFromServer = data;
-        setDataFromServer(initialDataFromServer);
+        setDataFromServer(data);
       })
       .catch((err) => {
         console.log("err", err);
       });
   }, []);
-  useEffect(() => {
-    if (!initialDataFromServer.length) return;
+  // useEffect(() => {
+  //   if (!initialDataFromServer.length) return;
+  //   const filter = query.filter ? query.filter : "";
+  //   setDataFromServer(
+  //     initialDataFromServer.filter((card) => card.title.startsWith(filter))
+  //   );
+  // }, [query, initialDataFromServer]);
+  const filteredCards = useMemo(() => {
+    if (!dataFromServer.length) return [];
     const filter = query.filter ? query.filter : "";
-    setDataFromServer(
-      initialDataFromServer.filter((card) => card.title.startsWith(filter))
-    );
-  }, [query, initialDataFromServer]);
+    // setDataFromServer((current) => {
+    return dataFromServer.filter((card) => card.title.startsWith(filter));
+    // });
+  }, [query, dataFromServer]);
   const handleDeleteCard = (_id) => {
     console.log("_id to delete (HomePage)", _id);
     setDataFromServer((dataFromServerCopy) =>
@@ -50,7 +54,7 @@ const HomePage = () => {
   return (
     <Container>
       <Grid container spacing={2}>
-        {dataFromServer.map((card) => (
+        {filteredCards.map((card) => (
           <Grid item key={card._id} xs={12} sm={6} md={4} lg={3}>
             <CardComponent
               _id={card._id}
