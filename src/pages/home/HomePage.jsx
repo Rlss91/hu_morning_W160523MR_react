@@ -21,9 +21,7 @@ const HomePage = () => {
       .get("/cards")
       .then(({ data }) => {
         if (userData) data = homePageNormalization(data, userData._id);
-        console.log("data", data);
         initialDataFromServer = data;
-        setDataFromServer(data);
       })
       .catch((err) => {
         console.log("err", err);
@@ -32,7 +30,6 @@ const HomePage = () => {
   useEffect(() => {
     if (!initialDataFromServer.length) return;
     const filter = query.filter ? query.filter : "";
-    console.log("filter", filter);
     setDataFromServer(
       initialDataFromServer.filter((card) => card.title.startsWith(filter))
     );
@@ -44,10 +41,8 @@ const HomePage = () => {
     );
     // dataFromServer = dataFromServer.filter((card) => card._id != _id);
     //return true for all the cards that has id that not equal to the id we want to delete
-    // console.log("dataFromServer", dataFromServer);
   };
   const handleEditCard = (_id) => {
-    // console.log("id to edit", _id);
     navigate(`${ROUTES.EDITCARD}/${_id}`);
   };
 

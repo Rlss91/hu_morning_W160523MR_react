@@ -9,7 +9,7 @@ import NavLinkComponent from "../NavLinkComponent";
 import { useSelector } from "react-redux";
 
 const Links = () => {
-  const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
+  const { loggedIn } = useSelector((bigPie) => bigPie.authSlice);
   return (
     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
       {alwaysLinks.map((myItem) => (

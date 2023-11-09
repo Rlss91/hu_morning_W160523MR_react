@@ -31,7 +31,6 @@ const CreateCardPage = () => {
     zip: "",
   });
   const { id: _id } = useParams();
-  // console.log(_id);
   const handleInputChange = (e) => {
     setInputValue((currentState) => ({
       ...currentState,
@@ -60,7 +59,6 @@ const CreateCardPage = () => {
           zip: +inputsValue.zip,
         },
       });
-      console.log("data from response", data);
     } catch (err) {
       console.log("err", err.response);
     }

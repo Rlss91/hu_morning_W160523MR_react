@@ -37,8 +37,6 @@ const UserManagement = () => {
   const [userArr, setUserArr] = useState(initialUsersArr);
   const handleDelete = (id) => {
     setUserArr((copyOfUsers) => copyOfUsers.filter((user) => user.id != id));
-    // initialUsersArr = initialUsersArr.filter((user) => user.id != id);
-    // console.log("initialUsersArr", initialUsersArr);
   };
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>

@@ -28,16 +28,13 @@ const CardComponent = ({
   onDeleteCard,
   onEditCard,
 }) => {
-  // console.log("CardComponent");
   const handlePhoneClick = () => {
     console.log("you clicked on phone btn");
   };
   const handleDeleteCardClick = () => {
-    console.log("_id to delete (CardComponent)", _id);
     onDeleteCard(_id);
   };
   const handleClickEditCard = () => {
-    // console.log("move to edit card page");
     onEditCard(_id);
   };
   return (
