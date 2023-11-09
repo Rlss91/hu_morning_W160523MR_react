@@ -22,6 +22,7 @@ const HomePage = () => {
       .then(({ data }) => {
         if (userData) data = homePageNormalization(data, userData._id);
         initialDataFromServer = data;
+        setDataFromServer(initialDataFromServer);
       })
       .catch((err) => {
         console.log("err", err);
